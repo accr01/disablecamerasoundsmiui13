@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main  # Cambia esto al nombre de tu rama principal si es diferente
+  workflow_dispatch:  # Agregamos esta opción para activar la ejecución manual
 
 jobs:
   build:
