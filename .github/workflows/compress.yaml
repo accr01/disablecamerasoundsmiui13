@@ -21,13 +21,13 @@ jobs:
     - name: Get module version from module.prop
       id: get_version
       run: |
-        version=$(grep -oP '(?<=version=).+' module.prop)
+        version=$(grep -oP '(?<=version=).+' disablecamerasoundsmiui13/module.prop)
         echo "Module version: $version"
         echo "::set-output name=version::$version"
 
     - name: Create ZIP archive
       run: |
-        cd disablecamerasoundsmiui13  # Cambia a la carpeta raíz del repositorio
+        cd disablecamerasoundsmiui13
         zip -r ../releases_workflow/repo.zip .
 
     - name: Upload ZIP archive
