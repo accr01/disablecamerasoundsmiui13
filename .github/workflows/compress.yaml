@@ -18,23 +18,27 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Get module version from module.prop
-      id: get_version
+    - name: Find module.prop
       run: |
-        version=$(grep -oP '(?<=version=).+' disablecamerasoundsmiui13/module.prop)
-        echo "Module version: $version"
-        echo "::set-output name=version::$version"
+        find . -type f -name 'module.prop' -exec grep -oP '(?<=version=).+' {} \> version.txt \;
+        cat version.txt
 
     - name: Create ZIP archive
       run: |
-        cd disablecamerasoundsmiui13
-        zip -r ../releases_workflow/repo.zip .
+        zip -r releases_workflow/repo.zip disablecamerasoundsmiui13
 
     - name: Upload ZIP archive
       uses: actions/upload-artifact@v2
       with:
         name: repository-archive
         path: releases_workflow/repo.zip
+
+    - name: Read version from file
+      id: get_version
+      run: |
+        version=$(cat version.txt)
+        echo "Module version: $version"
+        echo "::set-output name=version::$version"
 
     - name: Create Release
       id: create_release
