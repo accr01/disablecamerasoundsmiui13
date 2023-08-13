@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - master
-  workflow_dispatch:  # Agregamos esta opción para activar la ejecución manual
+  workflow_dispatch:
     inputs:
       release-trigger:
         description: 'Trigger the release manually'
@@ -27,8 +27,8 @@ jobs:
 
     - name: Create ZIP archive
       run: |
-        mkdir -p releases_workflow
-        zip -r releases_workflow/repo.zip disablecamerasoundsmiui13
+        cd disablecamerasoundsmiui13  # Cambia a la carpeta raíz del repositorio
+        zip -r ../releases_workflow/repo.zip .
 
     - name: Upload ZIP archive
       uses: actions/upload-artifact@v2
