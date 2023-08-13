@@ -1,9 +1,6 @@
-name: Compress Release
+name: Compress and Publish Release
 
 on:
-  push:
-    branches:
-      - master
   workflow_dispatch:
     inputs:
       release-trigger:
@@ -18,13 +15,35 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Find module.prop and extract version
+      id: get_version
+      run: |
+        version=$(grep -oP '(?<=version=).+' module.prop)
+        echo "Module version: $version"
+        echo "::set-output name=version::$version"
+
     - name: Create ZIP archive
       run: |
-        mkdir -p releases_workflow
-        zip -r releases_workflow/repo.zip .
+        zip -r repo.zip .
 
-    - name: Upload ZIP archive
-      uses: actions/upload-artifact@v2
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        name: repository-archive
-        path: releases_workflow/repo.zip
+        tag_name: v${{ steps.get_version.outputs.version }}
+        release_name: Release v${{ steps.get_version.outputs.version }}
+        draft: false
+        prerelease: false
+
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: repo.zip
+        asset_name: repo.zip
+        asset_content_type: application/zip
