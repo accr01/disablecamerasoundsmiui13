@@ -25,7 +25,8 @@ jobs:
 
     - name: Create ZIP archive
       run: |
-        zip -r releases_workflow/repo.zip disablecamerasoundsmiui13
+        cd disablecamerasoundsmiui13  # Cambia al directorio correcto
+        zip -r ../releases_workflow/repo.zip .
 
     - name: Upload ZIP archive
       uses: actions/upload-artifact@v2
