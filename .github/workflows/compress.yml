@@ -1,0 +1,24 @@
+name: Compress and Upload
+
+on:
+  push:
+    branches:
+      - main  # Cambia esto al nombre de tu rama principal si es diferente
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Create ZIP archive
+      run: |
+        zip -r repo.zip disablecamerasoundsmiui13
+
+    - name: Upload ZIP archive
+      uses: actions/upload-artifact@v2
+      with:
+        name: repository-archive
+        path: repo.zip
