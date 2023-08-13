@@ -1,4 +1,4 @@
-<h1 align="center">Magisk Module Template Extended (MMT-Ex)</h1>
+<h1 align="center">Camera Sound Disabler Module</h1>
 
 <div align="center">
   <!-- Version -->
