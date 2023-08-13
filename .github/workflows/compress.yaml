@@ -18,10 +18,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Find module.prop
+    - name: Find module.prop and extract version
       run: |
-        find . -type f -name 'module.prop' -exec grep -oP '(?<=version=).+' {} \> version.txt \;
-        cat version.txt
+        version=$(find . -type f -name 'module.prop' -exec grep -oP '(?<=version=).+' {} \;)
+        echo "Module version: $version" > version.txt
 
     - name: Create ZIP archive
       run: |
