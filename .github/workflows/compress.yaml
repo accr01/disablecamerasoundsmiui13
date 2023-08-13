@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:  # Agregamos esta opción para activar la ejecución manual
+    inputs:
+      release-trigger:
+        description: 'Trigger the release manually'
+        required: true
 
 jobs:
   build:
