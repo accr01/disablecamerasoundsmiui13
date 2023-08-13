@@ -1,0 +1,30 @@
+name: Compress Release
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+    inputs:
+      release-trigger:
+        description: 'Trigger the release manually'
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Create ZIP archive
+      run: |
+        mkdir -p releases_workflow
+        zip -r releases_workflow/repo.zip .
+
+    - name: Upload ZIP archive
+      uses: actions/upload-artifact@v2
+      with:
+        name: repository-archive
+        path: releases_workflow/repo.zip
