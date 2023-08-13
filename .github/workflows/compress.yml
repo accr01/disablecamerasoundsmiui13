@@ -22,13 +22,14 @@ jobs:
 
     - name: Create ZIP archive
       run: |
-        zip -r repo.zip disablecamerasoundsmiui13
+        mkdir -p releases_workflow
+        zip -r releases_workflow/repo.zip disablecamerasoundsmiui13
 
     - name: Upload ZIP archive
       uses: actions/upload-artifact@v2
       with:
         name: repository-archive
-        path: repo.zip
+        path: releases_workflow/repo.zip
 
     - name: Create Release
       id: create_release
@@ -48,6 +49,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: repo.zip
+        asset_path: releases_workflow/repo.zip
         asset_name: repo.zip
         asset_content_type: application/zip
