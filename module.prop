@@ -1,7 +1,7 @@
-id=MMT-Ex
-name=Magisk Module Template Extended
-version=v3.3
-versionCode=15
-author=Zackptg5
-description=Magisk Module Template Extended
+id=disablecamerasounds
+name=Camera Sound Disabler v1.0
+version=v1.0
+versionCode=10
+author=accr01
+description=Module to disable camera sounds on Android using Magisk or KernelSU.
 updateJson=https://raw.githubusercontent.com/Zackptg5/MMT-Extended/master/update.json
