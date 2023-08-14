@@ -1,7 +1,7 @@
 id=disablecamerasounds
 name=Camera Sound Disabler v1.0
-version=v1.0
-versionCode=10
+version=v1.1
+versionCode=11
 author=accr01
 description=Module to disable camera sounds on Android using Magisk or KernelSU.
 updateJson=https://raw.githubusercontent.com/accr01/disablecamerasoundsmiui13/master/update.json
