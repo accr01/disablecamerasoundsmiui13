@@ -1,7 +1,7 @@
 name: Create Release and Upload Zip
 
 on:
-  workflow_dispatch: # Esto permitirá ejecutar manualmente el flujo de trabajo desde el botón de "Run workflow" en la página del repositorio
+  workflow_dispatch: # This allows manually triggering the workflow from the "Run workflow" button on the repository page
 
 jobs:
   build:
@@ -11,15 +11,15 @@ jobs:
     - name: Checkout Repo
       uses: actions/checkout@v2
       
-    - name: Set Up Python
-      uses: actions/setup-python@v2
+    - name: Set Up Node.js
+      uses: actions/setup-node@v2
       with:
-        python-version: 3.x
+        node-version: 16 # Use Node.js version 16
 
     - name: Install Dependencies
       run: |
-        python -m pip install --upgrade pip
-        pip install requests
+        npm install -g zip-cli
+        npm install axios
 
     - name: Get Version from module.prop
       id: get_version
