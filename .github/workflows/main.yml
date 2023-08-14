@@ -35,6 +35,7 @@ jobs:
       uses: actions/create-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        RELEASE_VERSION: ${{ env.VERSION }} # Use the environment variable directly in the inputs
       with:
         tag_name: ${{ env.VERSION }}
         release_name: Release ${{ env.VERSION }}
